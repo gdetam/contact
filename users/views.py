@@ -8,3 +8,4 @@ class UserAPICreate(generics.CreateAPIView):
 
     queryset = CustomUser.objects.all()
     serializer_class = UserRegistrationSerializer
+
