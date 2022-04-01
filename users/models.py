@@ -4,8 +4,8 @@ from django.db import models
 from .managers import CustomUserManager
 
 SEX_TYPES = (
-             (0, 'Male'),
-             (1, 'Female'),
+    (0, 'Male'),
+    (1, 'Female'),
 )
 
 
@@ -34,3 +34,21 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return str(self.email)
+
+
+class UsersLikes(models.Model):
+    """class UsersLikes create structure users likes."""
+
+    class Meta:
+        verbose_name = 'Contact like'
+        verbose_name_plural = 'Contact like'
+        ordering = ['id']
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'user_like'],
+                                    name='unique_follow')
+        ]
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
+                             related_name='user')
+    user_like = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
+                                  related_name='user_like')
