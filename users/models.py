@@ -27,6 +27,8 @@ class CustomUser(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    latitude = models.FloatField(blank=False, default=59.9050144)
+    longitude = models.FloatField(blank=False, default=30.5829205)
 
     REQUIRED_FIELDS = ['email']
 
