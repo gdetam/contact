@@ -11,7 +11,7 @@ class UserRegistrationSerializer(UserCreateSerializer):
     class Meta:
         model = CustomUser
         fields = ('avatar', 'sex', 'first_name',
-                  'last_name', 'email') + ('password',)
+                  'last_name', 'email', 'latitude', 'longitude') + ('password',)
 
     def create(self, validated_data):
         avatar = validated_data.pop('avatar')
@@ -32,4 +32,4 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('sex', 'first_name',
-                  'last_name', 'email')
+                  'last_name', 'email', 'latitude', 'longitude')
