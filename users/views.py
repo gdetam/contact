@@ -5,8 +5,11 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
+
+from .filters import UserListFilter
 from .models import CustomUser, UsersLikes
-from .serializers import UserLikeSerializer, UserRegistrationSerializer
+from .serializers import UserLikeSerializer, UserRegistrationSerializer, UserListSerializer
 from .utils import send_message
 
 
@@ -41,3 +44,11 @@ class MatchAPICreate(generics.ListCreateAPIView):
             send_message(user, user_like)
             send_message(user_like, user)
         return Response({'like': 'Лайк отправлен!'}, status=status.HTTP_201_CREATED)
+
+
+class UserListAPIFilter(generics.ListAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserListSerializer
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = UserListFilter

@@ -25,3 +25,11 @@ class UserLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsersLikes
         fields = '__all__'
+
+
+class UserListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = ('sex', 'first_name',
+                  'last_name', 'email')
