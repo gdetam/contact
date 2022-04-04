@@ -1,4 +1,6 @@
 import os.path
+import django_heroku
+
 from datetime import timedelta
 from pathlib import Path
 
@@ -11,9 +13,9 @@ load_dotenv(find_dotenv())
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = int(os.environ.get('DEBUG', default=0))
+DEBUG = int(os.environ.get('DEBUG'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cooontact.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -114,7 +116,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = []
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -158,3 +160,5 @@ SIMPLE_JWT = {
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
 
 }
+
+django_heroku.settings(locals())
